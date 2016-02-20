@@ -1,0 +1,19 @@
+{
+  "name": "effects",
+  "version": "0.0.1",
+  "description": "A library for managing asynchronous data flow observations with generators",
+  "main": "effects.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richardanaya/effects.git"
+  },
+  "author": "Richard Anaya <richard.anaya@gmail.com> (http://www.richardanaya.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/richardanaya/effects/issues"
+  },
+  "homepage": "https://github.com/richardanaya/effects#readme"
+}
