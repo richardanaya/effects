@@ -4,8 +4,8 @@
 
 (function (window, module) {
   "use strict";
-  function effect(fn){
-    return (data)=>{
+  function Effect(fn){
+    return ()=>{
       var state = {
         isDisposed: false,
         effectDispose: null,
@@ -21,7 +21,7 @@
       }
 
       //iterate through generator and collect all the disposables
-      var it = fn.call(state,data);
+      var it = fn.apply(state,arguments);
       var res = it.next();
       while(!res.done){
         state.disposables.push(res.value);
@@ -32,9 +32,7 @@
       return state;
     }
   }
-  window.effects = module.exports = {
-    effect:effect
-  };
+  window.Effect = module.exports = Effect;
 })(
   typeof window !== "undefined" ? window : {},
   typeof module !== "undefined" ? module : {}
