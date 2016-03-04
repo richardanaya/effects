@@ -74,11 +74,9 @@ Simple yah? So now lets say you no longer have need to listen to key events effe
 myEffect.dispose()
 ```
 
-The basic pattern is the same.  Remember, everything returned to the effect needs to be IDisposable
-
 ##Fun With Co-Routines##
 
-Effects.js is setup to work well with coroutines too using librarices such as https://github.com/tj/co . Within the function, you have access to the current state of the effect.
+Effects.js is setup to work well with coroutines too using libraries such as https://github.com/tj/co . Within the function, you have access to the current state of the effect.
 
 ```javascript
 var TestEffect = Effect(()=>{
