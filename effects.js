@@ -32,6 +32,21 @@
       return state;
     }
   }
+
+  Effect.bundle = function(effects){
+    var state = {
+      isDisposed: false,
+      dispose: function(){
+        if(state.isDisposed) return;
+        for(var i in effects){
+          effects[i].dispose();
+        }
+        state.isDisposed = true;
+      }
+    }
+    return state;
+  }
+
   window.Effect = module.exports = Effect;
 })(
   typeof window !== "undefined" ? window : {},
