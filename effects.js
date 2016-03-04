@@ -45,7 +45,7 @@
         ret = it;
       }
 
-      if(Array.isArray(ret){
+      if(Array.isArray(ret)){
         ret.forEach(function(x){
             state.disposables.push(ret);
         })
