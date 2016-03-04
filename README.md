@@ -85,7 +85,7 @@ var TestEffect = Effect(()=>{
   co(function* (){
     console.log("started")
     while(!_this.isDisposed){
-      console.log("destroyed")
+      console.log("operating")
       yield sleep(1000)
     }
     console.log("destroyed")
