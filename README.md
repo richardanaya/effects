@@ -11,7 +11,7 @@ This library gives a simple container for asynchronous processes and observation
 or
 
 ```
-npm effects
+npm install effects
 ```
 
 #Why do I need this?#
