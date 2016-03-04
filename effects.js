@@ -21,7 +21,7 @@
       }
 
       //iterate through generator and collect all the disposables
-      var it = fn.apply(state,arguments);
+      var it = fn.apply(state,Array.prototype.slice.call(arguments));
       var res = it.next();
       while(!res.done){
         state.disposables.push(res.value);
