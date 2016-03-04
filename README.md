@@ -35,15 +35,16 @@ var MyPlayer = {
 }
 
 var moveLeft = ... //Observable stream of left key presses
-var moveRight = ... //Observable stream of left key presses
-var moveUp = ... //Observable stream of left key presses
-var moveDown = ... //Observable stream of left key presses
+var moveRight = ... //Observable stream of right key presses
+var moveUp = ... //Observable stream of up key presses
+var moveDown = ... //Observable stream of down key presses
 ```
 
 And you want to have this peice of data updated by actions received on those streams
 
 ```javascript
-var PlayerEffect = Effect((player)=>{
+var PlayerEffect = Effect((player,name)=>{
+  console.log("Managing "+name);
   return [
     moveLeft.subscribe(()=>{
       player.x-=1
@@ -64,7 +65,7 @@ var PlayerEffect = Effect((player)=>{
 Notice how we return an array. That array is  a list of disposable interfaces. In this case, whenever we subscribe to a stream, we get a disposable handle that we can use to shut it off.  Before we get to disposing though, lets setup this effect to work on a particular player:
 
 ```javascript
-var myEffect = PlayerEffect(MyPlayer)
+var myEffect = PlayerEffect(MyPlayer,"Wizard")
 ```
 
 Simple yah? So now lets say you no longer have need to listen to key events effecting a player. Effects.js allows you to easily dispose all the streams at once:
@@ -92,7 +93,7 @@ var TestEffect = Effect(()=>{
     console.log("destroyed")
   })
 
-  setTimeout(()=>this.destroy(),3000)
+  setTimeout(()=>_this.destroy(),3000)
 });
 ```
 
@@ -101,7 +102,7 @@ var TestEffect = Effect(()=>{
 As an alternative syntax for the more ES6 inclined, you can also use generators to return the disposables you would like your effect to manage:
 
 ```javascript
-var PlayerEffect = Effect(function *(player)=>{
+var PlayerEffect = Effect(function *(player){
   yield moveLeft.subscribe(()=>{
       player.x-=1
     })
