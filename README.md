@@ -16,7 +16,7 @@ npm install effects
 
 #Why do I need this?#
 
-Modern javascript is becoming increasingly about managing data flow.  Effects give you a simple container for data flow centered around particular data to exist and be disposed when needed.  In particular it manages **disposable** streams, ie. anything that conforms to:
+Modern javascript is becoming increasingly about managing data flow.  Effects give you a simple container for data flow behavior centered around particular data and be easily dispose of that behavior when needed.  Specifically it manages **disposable** streams, ie. anything that conforms to:
 
 ```javascript
 interface IDisposable {
