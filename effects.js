@@ -4,6 +4,16 @@
 
 (function (window, module) {
   "use strict";
+
+  function isIterable(obj) {
+    // checks for null and undefined
+    if (obj == null) {
+      return false
+    }
+    return obj[Symbol.iterator] !== undefined
+  }
+
+
   function Effect(fn){
     return function(){
       var state = {
@@ -22,13 +32,28 @@
 
       //iterate through generator and collect all the disposables
       var it = fn.apply(state,Array.prototype.slice.call(arguments));
-      var res = it.next();
-      while(!res.done){
-        state.disposables.push(res.value);
-        res = it.next();
+      var ret == null;
+      if(isIterable(it)){
+        var res = it.next();
+        while(!res.done){
+          state.disposables.push(res.value);
+          res = it.next();
+        }
+        ret =  res.value;
       }
-      //if they returned something, use it as effect's dispose
-      state.effectDispose = res.value
+      else {
+        ret = it;
+      }
+
+      if(Array.isArray(ret){
+        ret.forEach(function(x){
+            state.disposables.push(ret);
+        })
+      }
+      else  {
+        //if they returned something, use it as effect's dispose
+        state.effectDispose = ret;
+      }
       return state;
     }
   }
