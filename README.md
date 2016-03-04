@@ -91,7 +91,7 @@ var TestEffect = Effect(function(){
     console.log("destroyed")
   })
 
-  setTimeout(()=>_this.destroy(),3000)
+  setTimeout(()=>_this.dispose(),3000)
 });
 ```
 
