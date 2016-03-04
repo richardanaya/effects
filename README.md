@@ -1,6 +1,6 @@
 #Effects.js#
 
-This library gives a simple container for asynchronous processes.  
+This library gives a simple container for asynchronous processes and observation.  
 
 #Why do I need this?#
 
