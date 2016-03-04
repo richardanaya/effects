@@ -1,1 +1,98 @@
-Effects.js
+#Effects.js#
+
+This library gives a simple container for asynchronous processes.  
+
+#Why do I need this?#
+
+Modern javascript is becoming increasingly about managing data flow.  Effects give you a simple container for data flow centered around particular data to exist and be disposed when needed.  In particular it manages **disposable** streams, ie. anything that conforms to:
+
+```javascript
+interface IDisposable {
+    dispose()
+}
+```
+
+##Getting Started##
+
+Say you have this data object and a stream of actions from RxJS
+
+```javascript
+var MyPlayer = {
+  x:0,
+  y:0
+}
+
+var moveLeft = ... //Observable stream of left key presses
+var moveRight = ... //Observable stream of left key presses
+var moveUp = ... //Observable stream of left key presses
+var moveDown = ... //Observable stream of left key presses
+```
+
+And you want to have this peice of data updated by actions received on those streams
+
+```javascript
+var PlayerEffect = Effect((player)=>{
+  return [
+    moveLeft.subscribe(()=>{
+      player.x-=1
+    }),
+    moveRight.subscribe(()=>{
+      player.x+=1
+    }),
+    moveUp.subscribe(()=>{
+      player.y+=1
+    }),
+    moveDown.subscribe(()=>{
+      player.y-=1
+    })
+  ]
+})
+```
+
+Notice how we return an array. That array is  a list of disposable interfaces. In this case, whenever we subscribe to a stream, we get a disposable handle that we can use to shut it off.  Before we get to disposing though, lets setup this effect to work on a particular player:
+
+```javascript
+var myEffect = PlayerEffect(MyPlayer)
+```
+
+Simple yah? So now lets say you no longer have need to listen to key events effecting a player. Effects.js allows you to easily dispose all the streams at once:
+
+```javascript
+myEffect.dispose()
+```
+
+The basic pattern is the same.  Remember, everything returned to the effect needs to be IDisposable
+
+##Fun With Co-Routines##
+
+Effects.js is setup to work well with coroutines too using librarices such as https://github.com/tj/co . Within the function, you have access to the current state of the effect.
+
+```javascript
+var TestEffect = Effect(()=>{
+  var _this = this;
+  
+  co(function* (){
+    console.log("started")
+    while(!_this.isDisposed){
+      console.log("destroyed")
+      yield sleep(1000)
+    }
+    console.log("destroyed")
+  })
+
+  setTimeout(()=>this.destroy(),3000)
+});
+```
+
+##Using generators##
+
+As an alternative syntax for the more ES6 inclined, you can also use generators to return the disposables you would like your effect to manage:
+
+```javascript
+var PlayerEffect = Effect(function *(player)=>{
+  yield moveLeft.subscribe(()=>{
+      player.x-=1
+    })
+  ...
+})
+```
