@@ -5,7 +5,7 @@
 (function (window, module) {
   "use strict";
   function Effect(fn){
-    return ()=>{
+    return function(){
       var state = {
         isDisposed: false,
         effectDispose: null,
