@@ -43,7 +43,7 @@ var moveDown = ... //Observable stream of down key presses
 And you want to have this peice of data updated by actions received on those streams
 
 ```javascript
-var PlayerEffect = Effect((player,name)=>{
+var PlayerEffect = Effect(function(player,name){
   console.log("Managing "+name);
   return [
     moveLeft.subscribe(()=>{
@@ -79,7 +79,7 @@ myEffect.dispose()
 Effects.js is setup to work well with coroutines too using libraries such as https://github.com/tj/co . Within the function, you have access to the current state of the effect.
 
 ```javascript
-var TestEffect = Effect(()=>{
+var TestEffect = Effect(function(){
   var _this = this;
 
   co(function* (){
