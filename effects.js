@@ -33,7 +33,7 @@
       //iterate through generator and collect all the disposables
       var it = fn.apply(state,Array.prototype.slice.call(arguments));
       var ret = null;
-      if(!Array.isArray(ret) && isIterable(it)){
+      if(!Array.isArray(it) && isIterable(it)){
         var res = it.next();
         while(!res.done){
           state.disposables.push(res.value);
