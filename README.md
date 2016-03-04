@@ -2,6 +2,18 @@
 
 This library gives a simple container for asynchronous processes and observation.  
 
+#Install
+
+```
+<script src="https://rawgit.com/richardanaya/effects/master/effects.js"></script>
+```
+
+or
+
+```
+npm effects
+```
+
 #Why do I need this?#
 
 Modern javascript is becoming increasingly about managing data flow.  Effects give you a simple container for data flow centered around particular data to exist and be disposed when needed.  In particular it manages **disposable** streams, ie. anything that conforms to:
@@ -70,7 +82,7 @@ Effects.js is setup to work well with coroutines too using librarices such as ht
 ```javascript
 var TestEffect = Effect(()=>{
   var _this = this;
-  
+
   co(function* (){
     console.log("started")
     while(!_this.isDisposed){
