@@ -95,7 +95,7 @@ var TestEffect = Effect(function(){
 });
 ```
 
-##Using generators
+##Using Generators
 
 As an alternative syntax for the more ES6 inclined, you can also use generators to return the disposables you would like your effect to manage:
 
