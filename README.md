@@ -1,11 +1,11 @@
-#Effects.js#
+#Effects.js
 
 This library gives a simple container for asynchronous processes and observation.  
 
 #Install
 
 ```
-<script src="https://rawgit.com/richardanaya/effects/master/effects.js"></script>
+<script src="https://cdn.rawgit.com/richardanaya/effects/master/effects.js"></script>
 ```
 
 or
@@ -14,7 +14,7 @@ or
 npm install effects
 ```
 
-#Why do I need this?#
+#Why do I need this?
 
 Modern javascript is becoming increasingly about managing data flow.  Effects give you a simple container for data flow behavior centered around particular data and be easily dispose of that behavior when needed.  Specifically it manages **disposable** streams, ie. anything that conforms to:
 
@@ -24,7 +24,7 @@ interface IDisposable {
 }
 ```
 
-##Getting Started##
+##Getting Started
 
 Say you have this data object and a stream of actions from RxJS
 
@@ -95,7 +95,7 @@ var TestEffect = Effect(function(){
 });
 ```
 
-##Using generators##
+##Using generators
 
 As an alternative syntax for the more ES6 inclined, you can also use generators to return the disposables you would like your effect to manage:
 

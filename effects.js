@@ -22,6 +22,7 @@
         dispose: function(){
           if(this.isDisposed) return;
           this.disposables.forEach((o)=>o.dispose());
+          this.disposables = null;
           this.isDisposed = true;
           if(this.effectDispose){
             this.effectDispose()
